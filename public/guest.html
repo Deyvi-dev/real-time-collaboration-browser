@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-time Collaboration Browser</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="assets/style.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let socket;
+      const BUFFER_MS = 1000;
+      if (!socket) {
+        socket = new io("localhost:3333");
+        const replayer = new rrweb.Replayer([], {
+        liveMode: true,
+      });
+      replayer.startLive(Date.now() - BUFFER_MS);
+        socket.on("receive", (event) => {
+          console.log(event);
+          replayer.addEvent(event);
+          // const iframe = document.querySelector('iframe')
+          // if (iframe) {
+          //   iframe.width = '100%';
+          //   iframe.height = '100%';
+          //   iframe.frameBorder = '0';
+          // }
+          // const canva = document.querySelector('canvas')
+          // if (canva) {
+          //   canva.width = '100%';
+        
+          // }
+        });
+      }
+
+    </script>
+  </body>
+</html>

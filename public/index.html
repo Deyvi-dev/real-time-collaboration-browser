@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-time Collaboration Browser</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+  </head>
+  <body>
+    <h1>Real-time Collaboration Browser by deyvi</h1>
+    <div id="content">
+      <!-- Your content here -->
+      <!-- <iframe  src="/test" width="100%" height="600"></iframe> -->
+      <label for="input">Teste1</label>
+      <input type="text" id="input" />
+      <img src="https://img.freepik.com/fotos-gratis/nave-espacial-brilhante-orbita-planeta-em-galaxia-estrelada-gerada-por-ia_188544-9655.jpg?w=1380&t=st=1712567642~exp=1712568242~hmac=d2c8791cee49f5b1e40615fde7e0982bd190f6e75a603171a2829ec8accb4f5b"/>    
+      <!-- <iframe src="/test" width="100%" height="600"></iframe> -->
+    </div>
+    <script type="text/javascript">
+      let socket;
+      if (!socket) {
+        socket = new io("localhost:3333");
+        let stopFn = socket.on('new-connect', () => {
+          rrweb.record({
+          emit(event) {
+            socket.emit('events', event);
+          },
+        });
+        });
+      }
+    </script>
+  </body>
+</html
